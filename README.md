@@ -1,3 +1,5 @@
+Always opens the warp menu, even if the chunk is claimed. Discalimer: Any barrel standing on a barrier can be opened, regardless of whether the chunk is claimed or not.
+
 # claims
 
 Future TODO:
