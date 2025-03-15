@@ -270,10 +270,25 @@ public class ChunkProtectionListener implements Listener {
     @EventHandler
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
         if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && event.getClickedBlock() != null) {
-            if (shouldCancel(event.getPlayer(), event.getClickedBlock().getChunk())) {
-                Material type = event.getClickedBlock().getType();
+            Block clickedBlock = event.getClickedBlock();
 
-                Claim claim = api.getClaim(event.getClickedBlock().getChunk());
+            if (clickedBlock.getType() == Material.BARREL) {
+
+                Block blockUnder = clickedBlock.getRelative(0, -1, 0);
+
+                if (blockUnder.getType() == Material.BARRIER) {
+                    return;
+                }
+
+                if (shouldCancel(event.getPlayer(), clickedBlock.getChunk())) {
+                    event.setCancelled(true);
+                }
+            }
+
+            if (shouldCancel(event.getPlayer(), clickedBlock.getChunk())) {
+                Material type = clickedBlock.getType();
+
+                Claim claim = api.getClaim(clickedBlock.getChunk());
 
                 if (claim == null) {
                     return;
@@ -302,7 +317,7 @@ public class ChunkProtectionListener implements Listener {
             }
         }
     }
-
+    
     @EventHandler
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
         Claim claim = api.getClaim(event.getRightClicked().getChunk());
