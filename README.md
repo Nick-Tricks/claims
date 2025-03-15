@@ -1,3 +1,4 @@
+IMPORTANT: To prevent a dupication bug when placing loot in protected areas, run this command: function pk_waystones:settings/lootable_delay/set {delay:1}
 Always opens the warp menu, even if the chunk is claimed. Discalimer: Any barrel standing on a barrier can be opened, regardless of whether the chunk is claimed or not.
 
 # claims
